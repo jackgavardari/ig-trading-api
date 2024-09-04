@@ -7,13 +7,13 @@ import {AccountUpdate} from '../account';
 async function main(): Promise<void> {
   const client = await initClient();
   client.stream.subscribeCandles(
-    ['CS.D.BITCOIN.TODAY.IP', 'CS.D.ETHXBT.TODAY.IP'],
-    ChartResolution.MINUTE,
+    ['IX.D.NASDAQ.IFS.IP', 'IX.D.DOW.IFS.IP', 'CS.D.CFPGOLD.CFP.IP', 'CS.D.USDJPY.CFD.IP'],
+    ChartResolution.SECOND,
     (epic: string, candle: CandleStick) => {
       console.info('Streaming API Event  (subscribeCandles) : ', epic, candle);
     }
   );
-  client.stream.subscribeTicks(['CS.D.EOSUSD.CFD.IP'], (epic: string, tickPrice: TickPrice) => {
+  client.stream.subscribeTicks(['IX.D.NASDAQ.IFS.IP'], (epic: string, tickPrice: TickPrice) => {
     console.info('Streaming API Event (subscribeTicks) : ', epic, tickPrice);
   });
   client.stream.subscribeTrade((accountId: string, tradeSubscriptionUpdate: tradeSubscriptionUpdate) => {
